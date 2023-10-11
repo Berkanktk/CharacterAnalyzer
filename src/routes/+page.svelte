@@ -42,7 +42,7 @@
 
             <div class="form-control mt-10 w-full relative">
                 <textarea
-                    class="textarea textarea-bordered textarea-sm w-full min-size"
+                    class="textarea textarea-bordered textarea-sm w-full min-size max-size"
                     placeholder="Enter text here"
                     rows="10"
                     bind:value={text}
@@ -72,5 +72,9 @@
 
     .min-size {
         min-height: 4rem;
+    }
+
+    .max-size {
+        max-height: 500px;
     }
 </style>
