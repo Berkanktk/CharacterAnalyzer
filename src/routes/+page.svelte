@@ -1,5 +1,6 @@
 <script lang="ts">
     let text: string = ""; // Variable to store the text from the textarea
+    let frequencyData = {};
 
     // Helper function to capitalize each word
     function capitalizeText(text: string): string {
@@ -49,6 +50,29 @@
     // Helper function to reverse the text
     function reverseText(text: string): string {
         return text.split("").reverse().join("");
+    }
+
+    function calculateWordFrequency(inputText: string) {
+        const words = inputText.toLowerCase().match(/\b\w+\b/g);
+        const frequency: Record<string, number> = {};
+
+        if (words) {
+            words.forEach((word) => {
+                frequency[word] = (frequency[word] || 0) + 1;
+            });
+        }
+
+        // Sort the frequency data by occurrence (descending)
+        frequencyData = Object.entries(frequency)
+            .sort((a, b) => b[1] - a[1])
+            .reduce((obj, [word, count]) => ({ ...obj, [word]: count }), {});
+
+        return frequencyData;
+    }
+
+    // Watch for changes in the 'text' variable and update word frequency
+    $: {
+        frequencyData = calculateWordFrequency(text);
     }
 </script>
 
@@ -133,8 +157,32 @@
 
     <div class="w-1/4 p-10">
         <h1 class="text-3xl font-bold text-center">Frequency</h1>
-        <p>Nothing yet</p>
-    </div>
+        {#if Object.keys(frequencyData).length === 0}
+            <div class="text-center mt-10">No data to display</div>
+        {:else}
+            <div class="overflow-x-auto mt-10 max-h-[500px] overflow-y-auto">
+                <table class="table table-sm">
+
+                    <thead>
+                        <tr>
+                            <th>Word</th>
+                            <th>Occurrence</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {#each Object.entries(frequencyData) as [word, count]}
+                            <tr class="hover">
+                                <td>{word}</td>
+                                <td>{count}</td>
+                            </tr>
+                        {/each}
+                    </tbody>
+
+                </table>
+            </div>
+        {/if}
+    </div>    
 </div>
 
 <style>
