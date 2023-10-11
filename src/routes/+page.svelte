@@ -22,7 +22,7 @@
 
 <div class="md:flex flex-wrap flex-grow text-center p-5">
     <div class="xl:w-1/4 md:p-10 text-center md:mt-20">
-        <div class="stats md:stats-vertical shadow flex md:flex-col">
+        <div class="stats md:stats-vertical shadow flex md:flex-col md:mx-20">
             <Stat title="Characters (no space)" value={charactersWithoutSpace} />
             <Stat title="Unique Words" value={uniqueWords} />
             <Stat title="Reading Time" value={readingTime > 1 ? `${readingTime} minutes` : `${readingTime} minute`} />
