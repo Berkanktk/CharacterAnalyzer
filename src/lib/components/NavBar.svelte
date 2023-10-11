@@ -34,7 +34,7 @@
       </details>
     </div>
     <div class="navbar-center my-4">
-      <h1 class="font-bold text-4xl">Character Analyzer</h1>
+      <h1 class="font-bold text-3xl">Character Analyzer</h1>
     </div>
     <div class="navbar-end">
       <a href="https://github.com/Berkanktk/CharacterAnalyzer" class="btn btn-ghost" target="_blank"><img src="github.svg" alt="github"></a>
