@@ -9,6 +9,11 @@
     const wordsPerMinute = 200;
     const speechPerMinute = 125;
 
+    let searchQuery: string = "";
+    let replaceQuery: string = "";
+    let searchResult: string = "";
+    let showSearchAndReplace: boolean = false;
+
     $: frequencyData = calculateWordFrequency(text, frequencyData);
     $: charactersWithoutSpace = text.replace(/ /g, "").length;
     $: uniqueWords = [...new Set(text.split(" ").filter(word => word !== ""))].length
@@ -18,6 +23,18 @@
     $: paragraphs = text.split('\n\n').filter(para => para.trim() !== "").length;
     $: sentences = text.split(/\.|\!|\?/).filter(sentence => sentence.trim() !== "").length;
 
+  // Function to perform a search and replace operation
+  function performSearchAndReplace() {
+    if (text && searchQuery && replaceQuery) {
+      text = text.replace(new RegExp(searchQuery, 'g'), replaceQuery);
+      searchResult = `${searchQuery} replaced with ${replaceQuery}`;
+    }
+  }
+
+    // Function to toggle the display of the search and replace inputs
+    function toggleSearchAndReplace() {
+    showSearchAndReplace = !showSearchAndReplace;
+  }
 </script>
 
 <div class="md:flex flex-wrap flex-grow text-center p-5">
@@ -33,7 +50,7 @@
 
     <div class="mx-auto">
         <div class="w-full">
-            <div class="stats shadow mx-auto mt-10 w-full md:flex">
+            <div class="stats shadow mx-auto mt-8 w-full md:flex">
                 <Stat title="Characters" value={text.length} />
                 <Stat title="Words" value={text.split(" ").filter(word => word !== "").length} />
                 <Stat title="Paragraphs" value={paragraphs} />
@@ -59,6 +76,31 @@
                 <button class="btn btn-neutral" on:click={() => (text = randomCase(text))}>rAnDoM</button>
                 <button class="btn btn-neutral" on:click={() => (text = reverseText(text))}>Reverse</button>
             </div>
+
+            <div class="mt-10">
+                <button class="btn btn-primary" on:click={toggleSearchAndReplace}>
+                  {#if showSearchAndReplace}
+                    Close Search & Replace
+                  {:else}
+                    Open Search & Replace
+                  {/if}
+                </button>
+            </div>
+
+            {#if showSearchAndReplace}
+              <div class="mt-10">
+                <div class="search-replace-inputs flex flex-wrap justify-center">
+                  <input class="input input-bordered m-1" placeholder="Search" bind:value={searchQuery} />
+                  <input class="input input-bordered m-1" placeholder="Replace" bind:value={replaceQuery} />
+                  <button class="btn btn-secondary m-1" on:click={performSearchAndReplace}>Replace</button>
+                </div>
+                <div class="search-result mt-2">
+                  {#if searchResult}
+                    <p class="text-green-500">{searchResult}</p>
+                  {/if}
+                </div>
+              </div>
+            {/if}
         </div>
     </div>
 
