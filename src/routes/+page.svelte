@@ -20,14 +20,14 @@
 
 </script>
 
-<div class="flex">
-    <div class="w-1/4 p-10 text-center mt-20">
+<div class="flex flex-wrap">
+    <div class="w-full p-5 md:w-1/4 md:p-10 text-center mt-10">
         <div class="stats stats-vertical shadow">
-            <Stat title="Characters (without space)" value={charactersWithoutSpace} />
+            <Stat title="Characters (no space)" value={charactersWithoutSpace} />
             <Stat title="Unique Words" value={uniqueWords} />
-            <Stat title="Reading Time" value={readingTime > 1 ? `${readingTime} minutes` : `${readingTime} minute`} />
-            <Stat title="Speech Time" value={speechTime > 1 ? `${speechTime} minutes` : `${speechTime} minute`} />
-            <Stat title="Average Word Length" value={averageWordLength} />
+            <Stat title="Reading Time" value={readingTime > 1 ? `${readingTime} min` : `${readingTime} min`} />
+            <Stat title="Speech Time" value={speechTime > 1 ? `${speechTime} min` : `${speechTime} min`} />
+            <Stat title="Avg. Word Length" value={averageWordLength} />
         </div>
     </div>
 
@@ -50,7 +50,7 @@
                 <Clipboard {text} />
             </div>
 
-            <div class="mt-10">
+            <div class="mt-8"> 
                 <button class="btn btn-neutral" on:click={() => (text = text.toUpperCase())}>UPPERCASE</button>
                 <button class="btn btn-neutral" on:click={() => (text = text.toLowerCase())}>lowercase</button>
                 <button class="btn btn-neutral" on:click={() => (text = capitalizeText(text))}>Capitalized Case</button>
