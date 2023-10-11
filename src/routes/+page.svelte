@@ -20,14 +20,14 @@
 
 </script>
 
-<div class="flex">
-    <div class="w-1/4 p-10 text-center mt-20">
-        <div class="stats stats-vertical shadow">
-            <Stat title="Characters (without space)" value={charactersWithoutSpace} />
+<div class="flex flex-wrap flex-grow text-center">
+    <div class="w-1/4 md:p-10 text-center mt-20">
+        <div class="stats md:stats-vertical shadow">
+            <Stat title="Characters (no space)" value={charactersWithoutSpace} />
             <Stat title="Unique Words" value={uniqueWords} />
             <Stat title="Reading Time" value={readingTime > 1 ? `${readingTime} minutes` : `${readingTime} minute`} />
             <Stat title="Speech Time" value={speechTime > 1 ? `${speechTime} minutes` : `${speechTime} minute`} />
-            <Stat title="Average Word Length" value={averageWordLength} />
+            <Stat title="Avg. Word Length" value={averageWordLength} />
         </div>
     </div>
 
@@ -75,6 +75,6 @@
     }
 
     .max-size {
-        max-height: 500px;
+        max-height: 450px;
     }
 </style>
