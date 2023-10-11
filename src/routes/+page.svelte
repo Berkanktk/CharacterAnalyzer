@@ -2,6 +2,7 @@
     import { capitalizeText, sentenceCase, invertCase, randomCase, reverseText, calculateWordFrequency } from "$lib/Helpers";
     import Stat from "$lib/components/Stat.svelte";
     import Frequency from "$lib/components/Frequency.svelte";
+    import Clipboard from "$lib/components/Clipboard.svelte";
 
     let text: string = ""; 
     let frequencyData = {};
@@ -46,6 +47,7 @@
                     rows="10"
                     bind:value={text}
                 />
+                <Clipboard {text} />
             </div>
 
             <div class="mt-10">
@@ -66,5 +68,9 @@
 <style>
     .btn {
         text-transform: none;
+    }
+
+    .min-size {
+        min-height: 4rem;
     }
 </style>
