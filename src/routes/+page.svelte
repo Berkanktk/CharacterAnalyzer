@@ -20,9 +20,9 @@
 
 </script>
 
-<div class="flex flex-wrap flex-grow text-center">
-    <div class="w-1/4 md:p-10 text-center mt-20">
-        <div class="stats md:stats-vertical shadow">
+<div class="md:flex flex-wrap flex-grow text-center p-5">
+    <div class="xl:w-1/4 md:p-10 text-center md:mt-20">
+        <div class="stats md:stats-vertical shadow flex md:flex-col	">
             <Stat title="Characters (no space)" value={charactersWithoutSpace} />
             <Stat title="Unique Words" value={uniqueWords} />
             <Stat title="Reading Time" value={readingTime > 1 ? `${readingTime} minutes` : `${readingTime} minute`} />
@@ -33,18 +33,18 @@
 
     <div class="mx-auto">
         <div class="w-full">
-            <div class="stats shadow mx-auto mt-10 w-full">
+            <div class="stats shadow mx-auto mt-10 w-full md:flex">
                 <Stat title="Characters" value={text.length} />
                 <Stat title="Words" value={text.split(" ").filter(word => word !== "").length} />
                 <Stat title="Paragraphs" value={paragraphs} />
                 <Stat title="Sentences" value={sentences} />
-              </div>
+            </div>
 
             <div class="form-control mt-10 w-full relative">
                 <textarea
                     class="textarea textarea-bordered textarea-sm w-full min-size max-size"
                     placeholder="Enter text here"
-                    rows="10"
+                    rows="7"
                     bind:value={text}
                 />
                 <Clipboard {text} />
