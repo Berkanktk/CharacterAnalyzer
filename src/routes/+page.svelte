@@ -1,3 +1,57 @@
+<script lang="ts">
+    let text: string = ""; // Variable to store the text from the textarea
+
+    // Helper function to capitalize each word
+    function capitalizeText(text: string): string {
+        return text
+            .split(" ")
+            .map(
+                (word) =>
+                    word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+            )
+            .join(" ");
+    }
+
+    // Helper function to convert text to sentence case
+    function sentenceCase(text: string): string {
+        return text
+            .split(". ")
+            .map(
+                (sentence) =>
+                    sentence.charAt(0).toUpperCase() +
+                    sentence.slice(1).toLowerCase()
+            )
+            .join(". ");
+    }
+
+    // Helper function to invert the case of each character
+    function invertCase(text: string): string {
+        return text
+            .split("")
+            .map((char) =>
+                char === char.toUpperCase()
+                    ? char.toLowerCase()
+                    : char.toUpperCase()
+            )
+            .join("");
+    }
+
+    // Helper function to randomize the case of each character
+    function randomCase(text: string): string {
+        return text
+            .split("")
+            .map((char) =>
+                Math.random() < 0.5 ? char.toUpperCase() : char.toLowerCase()
+            )
+            .join("");
+    }
+
+    // Helper function to reverse the text
+    function reverseText(text: string): string {
+        return text.split("").reverse().join("");
+    }
+</script>
+
 <div class="flex">
     <div class="w-1/4 p-10 text-center mt-20">
         <div class="stats stats-vertical shadow">
@@ -61,18 +115,18 @@
                     class="textarea textarea-bordered textarea-sm w-full"
                     placeholder="Enter text here"
                     rows="10"
+                    bind:value={text}
                 />
             </div>
 
             <div class="mt-10">
-                <button class="btn btn-primary">UPPERCASE</button>
-                <button class="btn btn-primary">lowercase</button>
-                <button class="btn btn-primary">Capitalized Case</button>
-                <button class="btn btn-primary">Sentence case</button>
-                <button class="btn btn-primary">iNVERT cASE</button>
-                <button class="btn btn-primary">rAnDoM</button>
-                <button class="btn btn-primary">Reverse</button>
-                <button class="btn btn-primary">Flip</button>
+                <button class="btn btn-primary" on:click={() => (text = text.toUpperCase())}>UPPERCASE</button>
+                <button class="btn btn-primary" on:click={() => (text = text.toLowerCase())}>lowercase</button>
+                <button class="btn btn-primary" on:click={() => (text = capitalizeText(text))}>Capitalized Case</button>
+                <button class="btn btn-primary" on:click={() => (text = sentenceCase(text))}>Sentence case</button>
+                <button class="btn btn-primary" on:click={() => (text = invertCase(text))}>iNVERT cASE</button>
+                <button class="btn btn-primary" on:click={() => (text = randomCase(text))}>rAnDoM</button>
+                <button class="btn btn-primary" on:click={() => (text = reverseText(text))}>Reverse</button>
             </div>
         </div>
     </div>
