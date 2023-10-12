@@ -4,16 +4,14 @@
   import Frequency from "$lib/components/Frequency.svelte";
   import Clipboard from "$lib/components/Clipboard.svelte";
   import { locale, localeData } from "./stores";
-  import en from "$lib/locales/en.json";
-  import da from "$lib/locales/da.json";
-  import tr from "$lib/locales/tr.json";
+  import lang from "$lib/locales/all.json";
 
   let text: string = ""; 
   let frequencyData = {};
   const wordsPerMinute = 200;
   const speechPerMinute = 125;
   let data: any = {};
-  let currentLocale: string;
+  let currentLocale: App.LocaleKey;
 
   let searchQuery: string = "";
   let replaceQuery: string = "";
@@ -41,22 +39,15 @@ function performSearchAndReplace() {
   function toggleSearchAndReplace() {
   showSearchAndReplace = !showSearchAndReplace;
 }
-
- // Subscribe to the locale store and update data accordingly
- locale.subscribe((value) => {
-    currentLocale = value;
-
-    if (currentLocale === 'en') {
-      data = en;
-      localeData.set(data);
-    } else if (currentLocale === 'da') {
-      data = da;
-      localeData.set(data);
-    } else if (currentLocale === 'tr') {
-      data = tr;
-      localeData.set(data);
+// Subscribe to the locale store and update data accordingly
+locale.subscribe((value: string) => {
+    currentLocale = value as App.LocaleKey; 
+    
+    if (currentLocale in lang) {
+        data = lang[currentLocale];
+        localeData.set(data);
     }
-  });
+});
 
 </script>
 

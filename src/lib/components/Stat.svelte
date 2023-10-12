@@ -1,6 +1,6 @@
 <!-- Stat.svelte -->
 <script lang="ts">
-    export let title: string;
+    export let title: any;
     export let value: any;
   </script>
   
