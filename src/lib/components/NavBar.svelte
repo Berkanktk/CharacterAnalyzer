@@ -33,14 +33,18 @@
   <div class="navbar-start">
     <a href="/about" class="btn btn-ghost">{data.explanations}</a>
 
-    <details class="dropdown">
-      <summary class="m-1 btn btn-ghost"><img src="language.svg" alt="language" />{data.lang}</summary>
-      <ul class="p-2 shadow menu dropdown-content z-1 bg-base-100 rounded-box w-52">
+    <div class="dropdown">
+      <label for="language-dropdown" tabindex="0" class="m-1 btn btn-ghost">
+        <img src="language.svg" alt="language" />
+        {data.lang}
+      </label>
+      <ul tabindex="0" id="language-dropdown" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
         <li value="en"><a on:click={() => changeLanguage('en')}>English</a></li>
         <li value="da"><a on:click={() => changeLanguage('da')}>Danish</a></li>
         <li value="tr"><a on:click={() => changeLanguage('tr')}>Turkish</a></li>
       </ul>
-    </details>
+    </div>
+
   </div>
   <div class="navbar-center my-4">
     <h1 class="font-bold text-3xl">{data.projectName}</h1>
@@ -49,8 +53,7 @@
     <a
       href="https://github.com/Berkanktk/CharacterAnalyzer"
       class="btn btn-ghost"
-      target="_blank"><img src="github.svg" alt="github" /></a
-    >
+      target="_blank"><img src="github.svg" alt="github" /></a>
     <button class="btn btn-ghost ml-2" on:click={toggleTheme}>
       <img
         src={localTheme === "light" ? "sun.svg" : "moon.svg"}
