@@ -5,7 +5,6 @@
   import Clipboard from "$lib/components/Clipboard.svelte";
   import { locale, localeData } from "./stores";
   import lang from "$lib/locales/all.json";
-  import {   } from "svelte";
 
   const wordsPerMinute = 200;
   const speechPerMinute = 125;
@@ -116,6 +115,7 @@
               </div>
             </div>
           {/if}
+          
       </div>
   </div>
 
