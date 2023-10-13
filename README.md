@@ -27,13 +27,13 @@ Effortlessly transform your text to meet your specific needs:
 
 - **Convert Text to Uppercase or Lowercase**: Change the letter case of your text with a single click.
 
-<div style="display:flex; justify-content:center;">
+<div style="display:flex; justify-content:center;" align="center">
   <img src="static/assets/uppercase.png" alt="Light Mode" width="500px">
 </div>
 
 - **Capitalize Text in Various Ways**: Apply capitalization rules to make your text conform to different styles.
 
-<div style="display:flex; justify-content:center;">
+<div style="display:flex; justify-content:center;" align="center">
   <img src="static/assets/capitalized.png" alt="Light Mode" width="500px">
 </div>
 
@@ -41,7 +41,7 @@ Effortlessly transform your text to meet your specific needs:
 
 - **Create Random Capitalization**: Add a touch of randomness to your text, creating a playful or eye-catching appearance.
 
-<div style="display:flex; justify-content:center;">
+<div style="display:flex; justify-content:center;" align="center">
   <img src="static/assets/random.png" alt="Light Mode" width="500px">
 </div>
 
@@ -67,7 +67,7 @@ Character Analyzer is committed to inclusivity and provides a user-friendly expe
 
 - **Light Mode and Dark Mode**: Choose between light and dark modes to suit your visual preferences and reduce eye strain during extended use.
 
-<div style="display:flex; justify-content:center;">
+<div style="display:flex; justify-content:center;" align="center">
   <img src="static/assets/demo-light.png" alt="Light Mode" width="325px">
   <img src="static/assets/demo-dark.png" alt="Dark Mode" width="325px">
 </div>
