@@ -2,6 +2,7 @@
   import { theme } from "../../routes/stores";
   import { onMount } from "svelte";
   import {localeData, locale} from "../../routes/stores";
+  import { base } from '$app/paths';
 
   let localTheme: string;
   let data: any = {};
@@ -31,7 +32,7 @@
 
 <div class="navbar w-full border-b border-base-content/10">
   <div class="navbar-start">
-    <a href="/about" class="btn btn-ghost">{data.explanations}</a>
+    <a href="{base}/about" class="btn btn-ghost">{data.explanations}</a>
 
     <div class="dropdown">
       <label for="language-dropdown" tabindex="0" class="m-1 btn btn-ghost">
@@ -46,7 +47,7 @@
     </div>
 
   </div>
-  <a class="navbar-center my-4 btn btn-ghost" href="/">
+  <a class="navbar-center my-4 btn btn-ghost" href="{base}/">
     <h1 class="font-bold text-3xl">{data.projectName}</h1>
   </a>
   <div class="navbar-end">
