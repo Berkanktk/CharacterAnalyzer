@@ -7,7 +7,7 @@ Find all images [here](/static/assets/).
 
 ## Features
 
-**Character Analyzer** is a powerful and versatile text analysis tool designed to assist you in analyzing and manipulating text in various ways. Whether you're a writer, student, or simply interested in exploring the intricacies of written content, this feature-rich application has you covered.
+**Character Analyzer** is a simple yet powerful and versatile text analysis tool designed to assist you in analyzing and manipulating text in various ways. Whether you're a writer, student, or simply interested in exploring the intricacies of written content, this feature-rich application has you covered.
 
 ### Word Analysis
 
