@@ -1,11 +1,5 @@
 export function capitalizeText(text: string): string {
-    return text
-        .split(" ")
-        .map(
-            (word) =>
-                word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-        )
-        .join(" ");
+    return text.replace(/\b\w/g, (char) => char.toUpperCase());
 }
 
 // Helper function to convert text to sentence case
