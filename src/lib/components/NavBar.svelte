@@ -46,9 +46,9 @@
     </div>
 
   </div>
-  <div class="navbar-center my-4">
+  <a class="navbar-center my-4 btn btn-ghost" href="/">
     <h1 class="font-bold text-3xl">{data.projectName}</h1>
-  </div>
+  </a>
   <div class="navbar-end">
     <a
       href="https://github.com/Berkanktk/CharacterAnalyzer"
