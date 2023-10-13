@@ -5,7 +5,7 @@
   import Clipboard from "$lib/components/Clipboard.svelte";
   import { locale, localeData, comparisonMode } from "./stores";
   import lang from "$lib/locales/all.json";
-  import { diffChars, diffWords } from 'diff';
+  import { diffChars } from 'diff';
 
   const wordsPerMinute = 200;
   const speechPerMinute = 125;
@@ -44,6 +44,14 @@
   function toggleSearchAndReplace() {
     showSearchAndReplace = !showSearchAndReplace;
   }
+  
+  // Function to calculate counts
+  function calculateCounts () {
+    const diffResult = diffChars(text, comparisonText);
+    const removed = diffResult[1]?.count || 0;
+    const added = diffResult[2]?.count || 0;
+    counts = removed + added
+  };
 
   // Subscribe to the locale store and update data accordingly
   locale.subscribe((value: string) => {
@@ -54,14 +62,6 @@
           localeData.set(data);
       }
   });
-
-  // Function to calculate counts
-  const calculateCounts = () => {
-    const diffResult = diffChars(text, comparisonText);
-    const removed = diffResult[1]?.count || 0;
-    const added = diffResult[2]?.count || 0;
-    counts = removed + added
-  };
 </script>
 
 <div class="md:flex  text-center p-5">
@@ -111,7 +111,7 @@
                 />
               </div>
 
-              <div class="mt-4 border border-gray-600 rounded-lg p-4">
+              <div class="mt-4 border border-gray-600 rounded-lg p-4 break-all min-h-16">
                 {#each diffChars(text, comparisonText) as { added, removed, value }}
                   {#if added}
                     <span class="text-green-500">{value}</span>
