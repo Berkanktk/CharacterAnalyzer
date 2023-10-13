@@ -10,7 +10,7 @@
     }
 </script>
 
-<div class="xl:w-1/4 p-10">
+<div class="xl:w-1/4 p-10 flex-none">
     <h1 class="text-3xl font-bold text-center">{data.frequency}</h1>
     {#if hasData(frequencyData)}
         <div class="overflow-x-auto mt-10 max-h-[500px] overflow-y-auto">

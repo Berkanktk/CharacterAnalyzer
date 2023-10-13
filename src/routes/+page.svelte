@@ -3,8 +3,9 @@
   import Stat from "$lib/components/Stat.svelte";
   import Frequency from "$lib/components/Frequency.svelte";
   import Clipboard from "$lib/components/Clipboard.svelte";
-  import { locale, localeData } from "./stores";
+  import { locale, localeData, comparisonMode } from "./stores";
   import lang from "$lib/locales/all.json";
+  import { diffChars, diffWords } from 'diff';
 
   const wordsPerMinute = 200;
   const speechPerMinute = 125;
@@ -17,7 +18,11 @@
   let searchResult: string = "";
   let showSearchAndReplace: boolean = false;
   let currentLocale: App.LocaleKey;
-
+  let comparisonText = text;
+  let counts: any = 0
+  let isComparisonMode: boolean = false
+  
+  $: isComparisonMode = $comparisonMode
   $: frequencyData = calculateWordFrequency(text, frequencyData);
   $: charactersWithoutSpace = text.replace(/ /g, "").length;
   $: uniqueWords = [...new Set(text.split(" ").filter(word => word !== ""))].length
@@ -49,9 +54,17 @@
           localeData.set(data);
       }
   });
+
+  // Function to calculate counts
+  const calculateCounts = () => {
+    const diffResult = diffChars(text, comparisonText);
+    const removed = diffResult[1]?.count || 0;
+    const added = diffResult[2]?.count || 0;
+    counts = removed + added
+  };
 </script>
 
-<div class="md:flex flex-wrap flex-grow text-center p-5">
+<div class="md:flex  text-center p-5">
   <div class="xl:w-1/4 md:p-10 text-center md:mt-20">
       <div class="stats md:stats-vertical shadow flex md:flex-col md:mx-20">
           <Stat title={data.charactersWithoutSpaces} value={charactersWithoutSpace} />
@@ -62,7 +75,7 @@
       </div>
   </div>
 
-  <div class="mx-auto">
+  <div class="mx-auto flex grow">
       <div class="w-full">
           <div class="stats shadow mx-auto mt-8 w-full md:flex">
               <Stat title={data.characters} value={text.length} />
@@ -72,26 +85,61 @@
           </div>
 
           <div class="form-control mt-10 w-full relative">
+            {#if !isComparisonMode}
               <textarea
-                  class="textarea textarea-bordered textarea-sm w-full min-size max-size"
-                  placeholder={data.textAreaPlaceholder}
-                  rows="8"
-                  bind:value={text}
+                class="textarea textarea-bordered textarea-sm w-full min-size max-size"
+                placeholder={data.textAreaPlaceholder}
+                rows="8"
+                bind:value={text}
               />
               <Clipboard {text} />
+            {:else}
+              <div class="grid grid-cols-2 gap-4">
+                <textarea
+                  class="textarea textarea-bordered textarea-sm min-size max-size"
+                  rows="8"
+                  placeholder="Enter Original Text"
+                  bind:value={text}
+                  on:input={calculateCounts}
+                />
+                <textarea
+                  class="textarea textarea-bordered textarea-sm min-size max-size"
+                  rows="8"
+                  placeholder="Enter Comparison Text"
+                  bind:value={comparisonText}
+                  on:input={calculateCounts}
+                />
+              </div>
+
+              <div class="mt-4 border border-gray-600 rounded-lg p-4">
+                {#each diffChars(text, comparisonText) as { added, removed, value }}
+                  {#if added}
+                    <span class="text-green-500">{value}</span>
+                  {:else if removed}
+                    <span class="text-red-500">{value}</span>
+                  {:else}
+                    <span class="text-gray-500">{value}</span>
+                  {/if}
+                {/each}
+              </div>
+
+              <p class="mt-4">{counts} total differences</p>
+
+            {/if}
           </div>
 
-          <div class="mt-10">
-              <button class="btn btn-neutral" on:click={() => (text = text.toUpperCase())}>{data.upperCase}</button>
-              <button class="btn btn-neutral" on:click={() => (text = text.toLowerCase())}>{data.lowerCase}</button>
-              <button class="btn btn-neutral" on:click={() => (text = capitalizeText(text))}>{data.capitalizedCase}</button>
-              <button class="btn btn-neutral" on:click={() => (text = sentenceCase(text))}>{data.sentenceCase}</button>
-              <button class="btn btn-neutral" on:click={() => (text = invertCase(text))}>{data.invertCase}</button>
-              <button class="btn btn-neutral" on:click={() => (text = randomCase(text))}>{data.randomCase}</button>
-              <button class="btn btn-neutral" on:click={() => (text = reverseText(text))}>{data.reverseText}</button>
-          </div>
+          {#if !isComparisonMode}
+            <div class="mt-10">
+                <button class="btn btn-neutral" on:click={() => (text = text.toUpperCase())}>{data.upperCase}</button>
+                <button class="btn btn-neutral" on:click={() => (text = text.toLowerCase())}>{data.lowerCase}</button>
+                <button class="btn btn-neutral" on:click={() => (text = capitalizeText(text))}>{data.capitalizedCase}</button>
+                <button class="btn btn-neutral" on:click={() => (text = sentenceCase(text))}>{data.sentenceCase}</button>
+                <button class="btn btn-neutral" on:click={() => (text = invertCase(text))}>{data.invertCase}</button>
+                <button class="btn btn-neutral" on:click={() => (text = randomCase(text))}>{data.randomCase}</button>
+                <button class="btn btn-neutral" on:click={() => (text = reverseText(text))}>{data.reverseText}</button>
+            </div>
 
-          <div class="mt-10">
+            <div class="mt-10">
               <button class="btn btn-primary" on:click={toggleSearchAndReplace}>
                 {#if showSearchAndReplace}
                   {data.searchReplaceClose}
@@ -99,7 +147,9 @@
                   {data.searchReplaceOpen}
                 {/if}
               </button>
-          </div>
+            </div>
+
+          {/if}
 
           {#if showSearchAndReplace}
             <div class="mt-10">

@@ -1,13 +1,15 @@
 <script lang="ts">
   import { theme } from "../../routes/stores";
   import { onMount } from "svelte";
-  import {localeData, locale} from "../../routes/stores";
+  import {localeData, locale, comparisonMode} from "../../routes/stores";
   import { base } from '$app/paths';
 
   let localTheme: string;
   let data: any = {};
+  let isComparisonMode: boolean = false;
 
   $: data = $localeData;
+  $: isComparisonMode = $comparisonMode;
 
   // Function to toggle the theme
   function toggleTheme() {
@@ -28,6 +30,11 @@
       document.documentElement.setAttribute("data-theme", newTheme);
     });
   });
+
+  // Function to toggle comparison mode
+  function toggleComparisonMode() {
+    comparisonMode.update((currentMode) => !currentMode);
+  }
 </script>
 
 <div class="navbar w-full border-b border-base-content/10">
@@ -51,6 +58,10 @@
     <h1 class="font-bold text-3xl">{data.projectName}</h1>
   </a>
   <div class="navbar-end">
+    <button class="btn" on:click={toggleComparisonMode} class:btn-success={isComparisonMode}>
+      {data.comparisonMode}
+    </button>
+
     <a
       href="https://github.com/Berkanktk/CharacterAnalyzer"
       class="btn btn-ghost"
