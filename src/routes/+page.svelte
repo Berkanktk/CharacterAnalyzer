@@ -76,7 +76,7 @@
               <textarea
                   class="textarea textarea-bordered textarea-sm w-full min-size max-size"
                   placeholder={data.textAreaPlaceholder}
-                  rows="7"
+                  rows="8"
                   bind:value={text}
               />
               <Clipboard {text} />
@@ -133,5 +133,9 @@
 
   .max-size {
       max-height: 450px;
+  }
+
+  textarea {
+    line-height: 2.1em;
   }
 </style>
