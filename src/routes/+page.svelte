@@ -5,18 +5,19 @@
   import Clipboard from "$lib/components/Clipboard.svelte";
   import { locale, localeData } from "./stores";
   import lang from "$lib/locales/all.json";
+  import {   } from "svelte";
 
-  let text: string = ""; 
-  let frequencyData = {};
   const wordsPerMinute = 200;
   const speechPerMinute = 125;
+  
   let data: any = {};
-  let currentLocale: App.LocaleKey;
-
+  let text: string = ""; 
+  let frequencyData = {};
   let searchQuery: string = "";
   let replaceQuery: string = "";
   let searchResult: string = "";
   let showSearchAndReplace: boolean = false;
+  let currentLocale: App.LocaleKey;
 
   $: frequencyData = calculateWordFrequency(text, frequencyData);
   $: charactersWithoutSpace = text.replace(/ /g, "").length;
@@ -27,28 +28,28 @@
   $: paragraphs = text.split('\n\n').filter(para => para.trim() !== "").length;
   $: sentences = text.split(/\.|\!|\?/).filter(sentence => sentence.trim() !== "").length;
 
-// Function to perform a search and replace operation
-function performSearchAndReplace() {
-  if (text && searchQuery && replaceQuery) {
-    text = text.replace(new RegExp(searchQuery, 'g'), replaceQuery);
-    searchResult = `${searchQuery} replaced with ${replaceQuery}`;
+  // Function to perform a search and replace operation
+  function performSearchAndReplace() {
+    if (text && searchQuery && replaceQuery) {
+      text = text.replace(new RegExp(searchQuery, 'g'), replaceQuery);
+      searchResult = `${searchQuery} replaced with ${replaceQuery}`;
+    }
   }
-}
 
   // Function to toggle the display of the search and replace inputs
   function toggleSearchAndReplace() {
-  showSearchAndReplace = !showSearchAndReplace;
-}
-// Subscribe to the locale store and update data accordingly
-locale.subscribe((value: string) => {
-    currentLocale = value as App.LocaleKey; 
-    
-    if (currentLocale in lang) {
-        data = lang[currentLocale];
-        localeData.set(data);
-    }
-});
+    showSearchAndReplace = !showSearchAndReplace;
+  }
 
+  // Subscribe to the locale store and update data accordingly
+  locale.subscribe((value: string) => {
+      currentLocale = value as App.LocaleKey; 
+      
+      if (currentLocale in lang) {
+          data = lang[currentLocale];
+          localeData.set(data);
+      }
+  });
 </script>
 
 <div class="md:flex flex-wrap flex-grow text-center p-5">
