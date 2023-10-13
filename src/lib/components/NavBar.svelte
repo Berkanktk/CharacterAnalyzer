@@ -18,9 +18,16 @@
     );
   }
 
+  // Function to change the language
   function changeLanguage(lang: string) {
     localStorage.setItem("locale", lang);
     locale.set(lang);
+  }
+
+  // Function to handle the checkbox change
+  function handleComparisonModeChange(event: any ) {
+    const isChecked = event.target.checked;
+    comparisonMode.update(() => isChecked);
   }
 
   // Set the theme in localStorage and update the HTML attribute on theme change
@@ -30,11 +37,6 @@
       document.documentElement.setAttribute("data-theme", newTheme);
     });
   });
-
-  // Function to toggle comparison mode
-  function toggleComparisonMode() {
-    comparisonMode.update((currentMode) => !currentMode);
-  }
 </script>
 
 <div class="navbar w-full border-b border-base-content/10">
@@ -58,9 +60,12 @@
     <h1 class="font-bold text-3xl">{data.projectName}</h1>
   </a>
   <div class="navbar-end">
-    <button class="btn" on:click={toggleComparisonMode} class:btn-success={isComparisonMode}>
-      {data.comparisonMode}
-    </button>
+    <div class="form-control">
+      <label class="label cursor-pointer">
+        <span class="label-text">{data.comparisonMode}</span> 
+        <input type="checkbox" class="toggle toggle-accent ml-4" checked={isComparisonMode} on:change={handleComparisonModeChange} />
+      </label>
+    </div>
 
     <a
       href="https://github.com/Berkanktk/CharacterAnalyzer"
