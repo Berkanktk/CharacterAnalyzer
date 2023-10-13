@@ -21,6 +21,7 @@
   let comparisonText = text;
   let counts: any = 0
   let isComparisonMode: boolean = false
+  let totalChanged: number = 0
   
   $: isComparisonMode = $comparisonMode
   $: frequencyData = calculateWordFrequency(text, frequencyData);
@@ -36,7 +37,8 @@
   function performSearchAndReplace() {
     if (text && searchQuery && replaceQuery) {
       text = text.replace(new RegExp(searchQuery, 'g'), replaceQuery);
-      searchResult = `${searchQuery} replaced with ${replaceQuery}`;
+      totalChanged = text.split(replaceQuery).length - 1;
+      searchResult = `${totalChanged} instances of ${searchQuery} replaced with ${replaceQuery}`;
     }
   }
 
