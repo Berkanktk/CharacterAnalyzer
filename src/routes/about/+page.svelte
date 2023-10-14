@@ -55,6 +55,11 @@
   </section>
 
   <section class="my-8">
+    <h2 class="text-2xl font-semibold">{data.textComparison}</h2>
+    <p class="mt-4 text-lg">{data.textComparisonContent}</p>
+  </section>
+
+  <section class="my-8">
     <h2 class="text-2xl font-semibold">{data.accessibilityTitle}</h2>
     <p class="mt-4 text-lg">{data.accessibilityContent}</p>
     <ul class="list-disc pl-6 mt-2">
