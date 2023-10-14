@@ -2,7 +2,7 @@
     "en": {
         "lang": "en",
         "projectName": "Character Analyzer",
-        "explanations": "Explanations",
+        "explanations": "About",
         "characters": "Characters",
         "charactersWithoutSpaces": "Characters (no space)",
         "words": "Words",
@@ -69,7 +69,7 @@
     "da": {
         "lang": "da",
         "projectName": "Karakteranalyse",
-        "explanations": "Forklaringer",
+        "explanations": "Om",
         "characters": "Tegn",
         "charactersWithoutSpaces": "Tegn (uden mellemrum)",
         "words": "Ord",
@@ -136,7 +136,7 @@
     "tr": {
         "lang": "tr",
         "projectName": "Karakter Analizörü",
-        "explanations": "Açıklamalar",
+        "explanations": "Hakkında",
         "characters": "Karakterler",
         "charactersWithoutSpaces": "Karakterler (boşluksuz)",
         "words": "Kelimeler",
