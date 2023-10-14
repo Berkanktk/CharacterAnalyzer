@@ -73,9 +73,9 @@
   });
 </script>
 
-<div class="md:flex  text-center p-5">
-  <div class="xl:w-1/4 md:p-10 text-center md:mt-20">
-      <div class="stats md:stats-vertical shadow flex md:flex-col md:mx-20">
+<div class="xl:flex text-center p-5">
+  <div class="xl:w-1/4 text-center xl:mt-28">
+      <div class="stats xl:stats-vertical shadow flex xl:flex-col lg:mx-12">
           <Stat title={data.charactersWithoutSpaces} value={charactersWithoutSpace} />
           <Stat title={data.uniqueWords} value={uniqueWords} />
           <Stat title={data.readingTime} value={readingTime > 1 ? `${readingTime} ${data.minutes}` : `${readingTime} ${data.minutes}`} />

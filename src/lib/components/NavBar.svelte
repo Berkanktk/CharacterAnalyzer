@@ -31,6 +31,10 @@
     comparisonMode.update(() => isChecked);
   }
 
+  function handleComparisonBtnClick() {
+    comparisonMode.update(() => !isComparisonMode);
+  }
+
   // Function to toggle the mobile dropdown
   function toggleMobileDropdown() {
     mobileDropdownOpen = !mobileDropdownOpen;
@@ -47,7 +51,7 @@
 
 <div class="navbar w-full border-b border-base-content/10">
   <!-- Start Dropdown (shown on mobile) -->
-  <div class="navbar-start md:hidden">
+  <div class="navbar-start lg:hidden">
     <div class="dropdown">
       <button
         class="btn btn-ghost"
@@ -63,7 +67,14 @@
       >
         <!-- Add a label for the languages -->
         <li><a href="{base}/about">{data.explanations}</a></li>
-        <li class="text-gray-500 text-center">Languages</li>
+        <li class="text-gray-500 ">Comparison Mode</li>
+        <button
+          class="btn btn-ghost"
+          on:click={handleComparisonBtnClick}
+        >
+          {isComparisonMode ? "Disable Comparison" : "Enable Comparison"}
+        </button>
+        <li class="text-gray-500">Languages</li>
         <li><a on:click={() => changeLanguage("en")}>English</a></li>
         <li><a on:click={() => changeLanguage("da")}>Danish</a></li>
         <li><a on:click={() => changeLanguage("tr")}>Turkish</a></li>
@@ -73,7 +84,7 @@
   <!-- End Dropdown (shown on mobile) -->
 
   <!-- Regular navigation (hidden on mobile) -->
-  <div class="navbar-start hidden md:flex">
+  <div class="navbar-start hidden lg:flex">
     <a href="{base}/about" class="btn btn-ghost">{data.explanations}</a>
     <div class="dropdown">
       <label for="language-dropdown" tabindex="0" class="m-1 btn btn-ghost">
@@ -99,7 +110,7 @@
   <!-- Start of Right Navigation (hidden on mobile) -->
   <div class="navbar-end">
     <div class="form-control">
-      <label class="label cursor-pointer hidden md:flex mr-1">
+      <label class="label cursor-pointer hidden lg:flex mr-1">
         <span class="label-text">{data.comparisonMode}</span>
         <input
           type="checkbox"
@@ -111,7 +122,7 @@
     </div>
     <a
       href="https://github.com/Berkanktk/CharacterAnalyzer"
-      class="btn btn-ghost hidden md:flex mr-1"
+      class="btn btn-ghost hidden lg:flex mr-1"
       target="_blank"
     >
       <img src="github.svg" alt="github" />
