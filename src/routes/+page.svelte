@@ -48,12 +48,19 @@
   }
   
   // Function to calculate counts
-  function calculateCounts () {
+  function calculateCounts() {
     const diffResult = diffChars(text, comparisonText);
-    const removed = diffResult[1]?.count || 0;
-    const added = diffResult[2]?.count || 0;
-    counts = removed + added
-  };
+
+    // Calculate the total length of value strings in objects with "removed" or "added" set to true
+    const totalLength = diffResult.reduce((total, obj) => {
+      if (obj.value && (obj.removed === true || obj.added === true)) {
+        total += obj.value.length;
+      }
+      return total;
+    }, 0);
+
+    counts = totalLength;
+  }
 
   // Subscribe to the locale store and update data accordingly
   locale.subscribe((value: string) => {
