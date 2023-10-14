@@ -57,6 +57,12 @@ Efficiently search for specific terms or phrases within your text and replace th
 
 ![Demo](static/assets/search-replace.png)
 
+### Text Comparison
+
+Compare two pieces of text to identify differences and similarities. This feature is ideal for writers and editors who need to compare different versions of the same text. The tool also shows the total amount of differences in the two texts.
+
+![Demo](static/assets/comparison.png)
+
 ### Accessibility
 
 Character Analyzer is committed to inclusivity and provides a user-friendly experience with comprehensive accessibility features, including:
@@ -75,8 +81,7 @@ Character Analyzer is committed to inclusivity and provides a user-friendly expe
 - **Internationalization**: Support for multiple languages, allowing users around the world to experience the application in their preferred language.
 
 # Future Plans
-* [ ] Text Comparison
-* [ ] Text Summarization
+> None, as this project is now complete.
 
 # Installation
 1. Clone the repository
